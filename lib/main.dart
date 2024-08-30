@@ -18,9 +18,8 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Despesas Pesoais'),
-        backgroundColor: const Color.fromARGB(255, 86, 100,
-            206), // Define uma cor de fundo vermelha para o AppBar
+        title: const Text('Poupa +'),
+        backgroundColor: const Color.fromARGB(255, 202, 86, 206), // Define uma cor de fundo vermelha para o AppBar
       ),
       body: Column(
         
