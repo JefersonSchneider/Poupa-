@@ -27,3 +27,20 @@ flutter:
 
   uses-material-design: true
 
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/waiting.png
+  #   - images/a_dot_ham.jpeg
+
+  
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-Regular.ttf
+        - asset: assets/fonts/Quicksand-Bold.ttf
+          weight: 700
