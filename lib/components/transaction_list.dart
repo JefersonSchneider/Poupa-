@@ -5,9 +5,9 @@ import 'package:intl/intl.dart';
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
   final void Function(String) onRemove;
+  final void Function(BuildContext, Transaction) onEdit;
 
-  const TransactionList(this.transactions, this.onRemove, {Key? key})
-      : super(key: key);
+  const TransactionList(this.transactions, this.onRemove, this.onEdit, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class TransactionList extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
-                  height: 200,
+                  height: 385,
                   child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
+                    'images/Zzz-3d-icon.png',
+                    fit: BoxFit.fill,
                   ),
                 ),
               ],
@@ -43,7 +43,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.purple,
+                      backgroundColor: const Color(0xFF50E3C2),
                       radius: 30,
                       child: Padding(
                         padding: const EdgeInsets.all(6),
@@ -64,10 +64,20 @@ class TransactionList extends StatelessWidget {
                     subtitle: Text(
                       DateFormat('d MMM y').format(tr.date),
                     ),
-                     trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      color: Theme.of(context).colorScheme.error,
-                      onPressed: () => onRemove(tr.id),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          color: const Color(0xFF4A90E2),
+                          onPressed: () => onEdit(context, tr),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          color: const Color(0xFFF5A623),
+                          onPressed: () => onRemove(tr.id),
+                        ),
+                      ],
                     ),
                   ),
                 );

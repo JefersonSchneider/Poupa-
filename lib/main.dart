@@ -1,120 +1,75 @@
+import 'package:app_monitoramento/components/my_home_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:poupamais/components/chart.dart';
-import 'dart:math';
-import './components/transaction_form.dart';
-import './components/transaction_list.dart';
-import 'models/transaction.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'components/splash_screen.dart';
+import 'components/login_screen.dart';
+import 'components/signup_screen.dart';
+import 'components/home_screen.dart';
 
-main() => runApp(PoupamaisApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class PoupamaisApp extends StatelessWidget {
+  if (kIsWeb) {
+    databaseFactory = databaseFactoryFfiWeb;
+  } else if (defaultTargetPlatform == TargetPlatform.android ||
+             defaultTargetPlatform == TargetPlatform.iOS) {
+  } else {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
+
+  final prefs = await SharedPreferences.getInstance();
+  final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(PoupaMaisApp(isLoggedIn: isLoggedIn));
+}
+
+class PoupaMaisApp extends StatelessWidget {
+  final bool isLoggedIn;
+
+  const PoupaMaisApp({super.key, required this.isLoggedIn});
+
   @override
   Widget build(BuildContext context) {
     final ThemeData tema = ThemeData();
 
     return MaterialApp(
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.purple,
           secondary: Colors.amber,
-          onPrimary: Colors.white, // Adiciona contraste para o texto do AppBar
+          onPrimary: Colors.white,
         ),
         textTheme: tema.textTheme.copyWith(
-          titleLarge: TextStyle(
+          titleLarge: const TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.purple, // Define a cor de fundo do AppBar
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.purple,
           titleTextStyle: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 25,
             fontWeight: FontWeight.bold,
-            color: Colors.white, // Garante a visibilidade do título do AppBar
+            color: Colors.white,
           ),
         ),
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [];
-
-   List<Transaction> get _recentTransactions {
-    return _transactions.where((tr) {
-      return tr.date.isAfter(DateTime.now().subtract(
-        const Duration(days: 7),
-      ));
-    }).toList();
-  }
-
-  _addTransaction(String title, double value, DateTime date) {
-    final newTransaction = Transaction(
-      id: Random().nextDouble().toString(),
-      title: title,
-      value: value,
-      date: date,
-    );
-
-    setState(() {
-      _transactions.add(newTransaction);
-    });
-
-    Navigator.of(context).pop();
-  }
-
-  
-  _removeTransaction(String id) {
-    setState(() {
-      _transactions.removeWhere((tr) => tr.id == id);
-    });
-  }
-
-  _openTransactionFormModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (_) {
-        return TransactionForm(_addTransaction);
+      initialRoute: isLoggedIn ? '/home' : '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignUpScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/transactions': (context) => const MyHomePage(),
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Poupa+'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _openTransactionFormModal(context),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-           Chart(_recentTransactions),
-            TransactionList(_transactions, _removeTransaction),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _openTransactionFormModal(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

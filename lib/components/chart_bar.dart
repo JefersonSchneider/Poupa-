@@ -9,8 +9,8 @@ class ChartBar extends StatelessWidget {
     this.label,
     this.value,
     this.percentage,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ChartBar extends StatelessWidget {
         SizedBox(
           height: 20,
           child: FittedBox(
-            child: Text('${value!.toStringAsFixed(2)}'),
+            child: Text(value!.toStringAsFixed(2)),
           ),
         ),
         const SizedBox(height: 5),
@@ -43,7 +43,7 @@ class ChartBar extends StatelessWidget {
                 heightFactor: percentage,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: const Color(0xFF50E3C2),
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
