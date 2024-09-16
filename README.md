@@ -1,16 +1,47 @@
-# app_monitoramento
+# Guia de Configuração do Projeto app_poupamais
 
-A new Flutter project.
+## Pré-requisitos
 
-## Getting Started
+- [Flutter SDK](https://flutter.dev/docs/get-started/install)
+- [Dart SDK](https://dart.dev/get-dart)
+- [Editor de código](https://code.visualstudio.com/download) (é recomendado o Visual Studio Code)
+- [Emulador ou dispositivo físico](https://flutter.dev/docs/get-started/install/windows#set-up-the-android-emulator)
 
-This project is a starting point for a Flutter application.
+## Passo 1: Obtendo o Projeto
 
-A few resources to get you started if this is your first Flutter project:
+Baixe o projeto conforme anexado no Canvas.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Passo 2: Obtendo as Dependências
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Navegue até o diretório do projeto e execute o seguinte comando para obter todas as dependências necessárias:
+
+```bash  
+flutter pub get
+```  
+
+## Passo 3: Abrindo o Projeto no Editor de Código
+
+Abra o Visual Studio Code ou o editor de código de sua preferência e navegue até o diretório do seu projeto.
+
+```bash  
+cd seu-projetocode .
+```  
+
+## Passo 4: Executando o Projeto
+
+Certifique-se de que um emulador ou dispositivo físico está conectado e executando. Em seguida, execute o seguinte comando para iniciar o aplicativo:
+
+```bash  
+flutter run
+```  
+
+Isso irá compilar o código e iniciar o aplicativo no emulador ou dispositivo conectado.
+
+## Passo 5: Explorando o Projeto
+
+Agora você pode explorar o projeto Flutter. O arquivo principal do aplicativo está localizado em `lib/main.dart`.
+
+## Dicas Adicionais
+
+- Para obter uma visão geral das ferramentas e recursos disponíveis no Flutter, consulte a [documentação oficial](https://flutter.dev/docs).
+- Para obter ajuda com problemas específicos, visite o [fórum da comunidade Flutter](https://flutter.dev/community).  
