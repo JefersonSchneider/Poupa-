@@ -1,3 +1,4 @@
+import 'package:app_monitoramento/components/currency_page.dart';
 import 'package:app_monitoramento/components/my_home_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,7 @@ class PoupaMaisApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/transactions': (context) => const MyHomePage(),
+        '/currency': (context) => const CurrencyPage(),
       },
     );
   }

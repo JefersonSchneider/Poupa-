@@ -1,6 +1,6 @@
 {
-    "name": "poupamais",
-    "short_name": "poupamais",
+    "name": "app_monitoramento",
+    "short_name": "app_monitoramento",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

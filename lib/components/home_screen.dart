@@ -46,6 +46,39 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
+            bottom: 160,
+            left: 20,
+            right: 20,
+            child: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding: const EdgeInsets.all(15),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/currency');
+                  },
+                  child: const Text(
+                    'Ver Taxa de Câmbio',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
             bottom: 80,
             left: 20,
             right: 20,
